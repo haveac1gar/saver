@@ -1,9 +1,22 @@
-const App = () => {
+import { RecoilRoot } from "recoil";
+
+import { GlobalStyle, InitialiseComponent } from "./core";
+import { Home } from "./pages";
+
+function App() {
+
   return (
     <>
-      Hello motherfuca
-    </>
-  )
-};
+      <RecoilRoot>
+        <InitialiseComponent />
+
+        <GlobalStyle />
+
+        <Home />
+        </RecoilRoot>
+      </>
+  );
+
+}
 
 export default App;
