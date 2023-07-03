@@ -1,1 +1,2 @@
-export { useInitialiseUsdPrice } from "./useInitialiseUsdPrice";
+export { useInitialiseUsdPrice } from './useInitialiseUsdPrice';
+export { useUsdPrice } from './state';

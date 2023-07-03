@@ -1,9 +1,9 @@
-import { MoneyTransfer } from "../../core";
+import { MoneyTransfer } from '../../core';
 
 export enum SPENDING_TYPE {
-  SAVINGS = "SAVINGS",
-  COMPULSORY = "COMPULSORY",
-  EXTRA = "EXTRA",
+  SAVINGS = 'SAVINGS',
+  COMPULSORY = 'COMPULSORY',
+  EXTRA = 'EXTRA',
 }
 
 export type SpendingRow = MoneyTransfer & {

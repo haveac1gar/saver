@@ -1,116 +1,66 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { SPENDING_TYPE, SpendingCard, SpendingCardProps } from '../../features/spending';
+import { CURRENCY, Spacer } from '../../core';
 
-const TextBlock = styled.div`
-    padding: 8px 0;
-  `,
-  Title = styled.div`
-    font-size: 24px;
-    font-weight: 600;
-    padding: 40px 0;
-  `;
+const PageWrapper = styled.div`
+  margin: 36px 24px;
+`;
 
-enum CURRENCY {
-  USD = "USD",
-  RUB = "RUB",
-}
-enum SPENDING_TYPE {
-  SAVINGS = "SAVINGS",
-  COMPULSORY = "COMPULSORY",
-  EXTRA = "EXTRA",
-}
+const Title = styled.div`
+  font-size: 24px;
+  font-weight: 600;
+`;
 
-type MoneyTransfer = {
-  currency: CURRENCY;
-  value: number;
-};
-type Spending = MoneyTransfer & {
-  type: SPENDING_TYPE;
-  name: string;
-};
-
-const USD_PRICE = 89,
-  FULL_DATA: {
-    income: MoneyTransfer;
-    spendings: Spending[];
-  } = {
-    "income": {
-      "currency": CURRENCY.USD,
-      "value": 4000,
-    },
-    "spendings": [
+const SpendingCardData: SpendingCardProps = {
+  group: {
+    name: 'Июль 2023',
+    owner: '123',
+    spendings: [
       {
-        "currency": CURRENCY.USD,
-        "value": 980,
-        "type": SPENDING_TYPE.COMPULSORY,
-        "name": "Аренда",
+        currency: CURRENCY.USD,
+        value: 980,
+        type: SPENDING_TYPE.COMPULSORY,
+        name: 'Аренда',
       },
       {
-        "currency": CURRENCY.RUB,
-        "value": 45000,
-        "type": SPENDING_TYPE.COMPULSORY,
-        "name": "Еда и прочее",
+        currency: CURRENCY.RUB,
+        value: 45000,
+        type: SPENDING_TYPE.COMPULSORY,
+        name: 'Еда и прочее',
       },
       {
-        "currency": CURRENCY.RUB,
-        "value": 70000,
-        "type": SPENDING_TYPE.COMPULSORY,
-        "name": "Таблетки",
+        currency: CURRENCY.RUB,
+        value: 70000,
+        type: SPENDING_TYPE.COMPULSORY,
+        name: 'Таблетки',
       },
       {
-        "currency": CURRENCY.RUB,
-        "value": 40000,
-        "type": SPENDING_TYPE.COMPULSORY,
-        "name": "Бабушка",
+        currency: CURRENCY.RUB,
+        value: 20000,
+        type: SPENDING_TYPE.EXTRA,
+        name: 'Развлечения',
       },
-    ],
+      {
+        currency: CURRENCY.USD,
+        value: 200,
+        type: SPENDING_TYPE.SAVINGS,
+        name: 'Сбережения',
+      },
+      {
+        currency: CURRENCY.RUB,
+        value: 40000,
+        type: SPENDING_TYPE.COMPULSORY,
+        name: 'Бабушка',
+      }]
   },
-  getRUB = (data: MoneyTransfer) => (data.currency === CURRENCY.RUB
-? data.value
-: data.value * USD_PRICE),
-  getUSD = (data: MoneyTransfer) => (data.currency === CURRENCY.USD
-? data.value
-: data.value / USD_PRICE);
+};
 
 export function Home() {
-
-  const incomeUSD = getUSD(FULL_DATA.income),
-    incomeRUB = getRUB(FULL_DATA.income),
-    spendingUSD = FULL_DATA.spendings.reduce(
-      (acc, curr) => acc + getUSD(curr),
-      0
-    ),
-    spendingRUB = FULL_DATA.spendings.reduce(
-      (acc, curr) => acc + getRUB(curr),
-      0
-    );
-
-  console.log({
-    incomeRUB,
-    incomeUSD,
-    spendingRUB,
-    spendingUSD,
-  });
-
   return (
-    <>
-      <Title>
-            CASH SAVER
-</Title>
-
-      <TextBlock>
-            Income:{incomeUSD.toFixed(2)}
-
-        {" "}
-            USD
-</TextBlock>
-
-      <TextBlock>
-            Spendings:{spendingUSD.toFixed(2)}
-
-        {" "}
-            USD
-</TextBlock>
-      </>
+    <PageWrapper>
+      <Title>CASH SAVER</Title>
+      <Spacer size={24} />
+      <SpendingCard group={SpendingCardData.group} />
+    </PageWrapper>
   );
-
 }

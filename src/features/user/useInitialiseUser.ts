@@ -1,43 +1,24 @@
-import { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
 
-import { firebaseAuth, signIn } from "../../core";
-import { useSetUID, useUID } from "./state";
+import { firebaseAuth, signIn } from '../../core';
+import { useSetUID, useUID } from './state';
 
 export const useInitialiseUser = () => {
-
   const uid = useUID(),
     setUID = useSetUID();
 
-  useEffect(
-    () => {
+  useEffect(() => {
+    if (uid) {
+      return;
+    }
 
-      if (uid) {
+    signIn();
+  }, [uid]);
 
-        return;
-
-      }
-
-      signIn();
-
-    },
-    [uid]
-  );
-
-  useEffect(
-    () => {
-
-      onAuthStateChanged(
-        firebaseAuth,
-        user => {
-
-          setUID(user?.uid ?? null);
-
-        }
-      );
-
-    },
-    [useSetUID]
-  );
-
+  useEffect(() => {
+    onAuthStateChanged(firebaseAuth, user => {
+      setUID(user?.uid ?? null);
+    });
+  }, [setUID]);
 };

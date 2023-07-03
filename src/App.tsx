@@ -1,10 +1,9 @@
-import { RecoilRoot } from "recoil";
+import { RecoilRoot } from 'recoil';
 
-import { GlobalStyle, InitialiseComponent } from "./core";
-import { Home } from "./pages";
+import { GlobalStyle, InitialiseComponent } from './core';
+import { Home } from './pages';
 
 function App() {
-
   return (
     <>
       <RecoilRoot>
@@ -13,10 +12,9 @@ function App() {
         <GlobalStyle />
 
         <Home />
-        </RecoilRoot>
-      </>
+      </RecoilRoot>
+    </>
   );
-
 }
 
 export default App;
